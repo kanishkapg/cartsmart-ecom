@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-# The database URL (SQLite creates a local file named products.db)
-SQLALCHEMY_DATABASE_URL = "sqlite:///./products.db"
+# The database URL (SQLite creates a local file named orders.db)
+SQLALCHEMY_DATABASE_URL = "sqlite:///./orders.db"
 
 # Engine is responsible for the actual connection
 engine = create_engine(
