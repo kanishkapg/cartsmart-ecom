@@ -10,7 +10,8 @@ def create_product(db: Session, product: schemas.ProductCreate):
     db_product = models.Product(
         name = product.name,
         description = product.description,
-        price = product.price
+        price = product.price,
+        owner_id = product.owner_id
     )
     db.add(db_product)
     db.commit()

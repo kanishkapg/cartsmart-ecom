@@ -6,6 +6,7 @@ class ProductBase(BaseModel):
     name: str
     description: Optional[str] = None
     price: float
+    owner_id: int
 
 # Schema for creating a product (inherits base, needs nothing extra right now)
 class ProductCreate(ProductBase):
