@@ -18,7 +18,8 @@ USER_SERVICE_URL = "http://127.0.0.1:8001"
 def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db)):
     #Validate User exists
     try:
-        user_response = httpx.get(f"{USER_SERVICE_URL}/users/{order.user_id}")
+        with httpx.Client(trust_env=False) as client:
+            user_response = client.get(f"{USER_SERVICE_URL}/users/{order.user_id}")
 
         if user_response.status_code != 200:
             raise HTTPException(status_code=400, detail="User is not found")
@@ -30,7 +31,8 @@ def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db)):
     
     # Validate Product exists and get price
     try:
-        product_response = httpx.get(f"{PRODUCT_SERVICE_URL}/products/{order.product_id}")
+        with httpx.Client(trust_env=False) as client:
+            product_response = client.get(f"{PRODUCT_SERVICE_URL}/products/{order.product_id}")
 
         if product_response.status_code != 200:
             raise HTTPException(status_code=400, detail="Product is not found")

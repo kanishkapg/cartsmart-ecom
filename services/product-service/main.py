@@ -16,7 +16,11 @@ USER_SERVICE_URL = "http://127.0.0.1:8001"
 def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):
     # We make a synchronous GET request to the User Service to check if the owner (user) exists before creating the product
     try:
-        response = httpx.get(f"{USER_SERVICE_URL}/users/{product.owner_id}")
+        # Create a client that explicitly ignores system proxy environment variables
+        with httpx.Client(trust_env=False) as client:
+            response = client.get(
+                f"{USER_SERVICE_URL}/users/{product.owner_id}"
+            )
         # If the User Service returns a 404 Not Found, we block the product creation
         if response.status_code == 404:
             raise HTTPException(status_code=400, detail="Owner(User) does not exist")
