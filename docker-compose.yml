@@ -1,0 +1,24 @@
+# ecommerce-platform/docker-compose.yml
+version: '3.8'
+
+services:
+  product-service:
+    build: ./services/product-service     # Look here for the Dockerfile
+    ports:
+      - "8000:8000"              # Map your laptop's port 8000 to the container's port 8000
+    volumes:
+      - ./services/product-service:/app
+
+  user-service:
+    build: ./services/user-service
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./services/user-service:/app
+
+  order-service:
+    build: ./services/order-service
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./services/order-service:/app

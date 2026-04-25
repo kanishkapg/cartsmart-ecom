@@ -10,7 +10,7 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Product Service")
 
-USER_SERVICE_URL = "http://127.0.0.1:8001"
+USER_SERVICE_URL = "http://user-service:8001"
 
 @app.post("/products/", response_model=schemas.ProductResponse)
 def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):

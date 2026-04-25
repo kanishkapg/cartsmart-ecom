@@ -11,8 +11,8 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Order Service")
 
-PRODUCT_SERVICE_URL = "http://127.0.0.1:8000"
-USER_SERVICE_URL = "http://127.0.0.1:8001"
+PRODUCT_SERVICE_URL = "http://product-service:8000"
+USER_SERVICE_URL = "http://user-service:8001"
 
 @app.post("/orders/", response_model=schemas.OrderResponse)
 def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db)):
